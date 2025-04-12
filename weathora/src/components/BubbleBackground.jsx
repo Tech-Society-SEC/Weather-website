@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import Particles from "react-tsparticles";
-import { loadFull } from "tsparticles"; // ✅ use this, NOT 'tsparticles-engine'
+import { loadFull } from "tsparticles";
 
 export default function BubbleBackground() {
   const particlesInit = useCallback(async (engine) => {
@@ -13,11 +13,11 @@ export default function BubbleBackground() {
       init={particlesInit}
       options={{
         fullScreen: { enable: true, zIndex: -1 },
-        background: { color: "#000957" },
+        background: { color: "#000957" }, // Light blue watery feel
         particles: {
           number: { value: 30, density: { enable: true, area: 800 } },
           color: {
-            value: ["#EEEEEE", "#00ADB5"],
+            value: ["#EEEEEE", "#00ADB5"], // Two colors for particles
           },
           shape: { type: "star" },
           opacity: {
@@ -30,8 +30,8 @@ export default function BubbleBackground() {
             random: true,
             anim: {
               enable: true,
-              speed: 3,
-              size_min: 3,
+              speed: 3, // Try 2–4
+              size_min: 3, // Smallest size while pulsing
               sync: false,
             },
           },
