@@ -18,7 +18,7 @@ function App() {
       <button
         onClick={() => {
           localStorage.clear();
-          window.location.reload(); // force reload after clearing
+          window.location.reload();
         }}
         className="absolute top-4 right-4 px-4 py-2 bg-red-600 text-white rounded-lg"
       >

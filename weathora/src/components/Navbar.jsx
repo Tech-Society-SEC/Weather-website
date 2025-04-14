@@ -4,7 +4,7 @@ import SiteLogo from "./SiteLogo";
 function Navbar() {
   return (
   <div className="text-white bg-cyan-900 flex items-center justify-between p-5 shadow-2xl shadow-black">
-    <SiteLogo />
+    <SiteLogo showText={true}/>
     <div className="p-1 w-[50%]">
       <input type="text" placeholder="🔍 Search" className="rounded-2xl bg- p-3 px-7 w-full text-3xl text-black"/>
     </div>
