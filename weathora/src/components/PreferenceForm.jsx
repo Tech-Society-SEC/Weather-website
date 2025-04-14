@@ -46,6 +46,16 @@ function PreferenceForm({ setHasUser }) {
     activity: "",
     places: "",
   });
+  const [preferenceFormError, setPreferenceFormError] = useState({
+    name: false,
+    nickname: false,
+    age: false,
+    gender: false,
+    weather: false,
+    timing: false,
+    activity: false,
+    places: false,
+  });
   useEffect(() => {
     const place = async () => {
       try {
@@ -66,28 +76,45 @@ function PreferenceForm({ setHasUser }) {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    localStorage.setItem("user-preference", JSON.stringify(preferenceForm));
-    setHasUser(true);
+    const allFieldsFilled = Object.values(preferenceForm).every(Boolean);
+    if (!allFieldsFilled) {
+      const emptyFields = Object.entries(preferenceForm)
+        .filter(([key, value]) => !value)
+        .map(([key]) => key);
+      console.log(emptyFields);
+      const newError = { ...emptyFields };
+      emptyFields.forEach((field) => {
+        newError[field] = true;
+      });
+      setPreferenceFormError(newError);
+    } else {
+      localStorage.setItem("user-preference", JSON.stringify(preferenceForm));
+      setHasUser(true);
+    }
   };
-
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
       <div className="text-black text-3xl flex gap-28 justify-between items-center w-full">
         <LeftPreferenceForm
           preferenceForm={preferenceForm}
           setValue={setValue}
           weather_preference={weather_preference}
           activity={activity}
+          preferenceFormError={preferenceFormError}
         />
         <RightPreferenceForm
           preferenceForm={preferenceForm}
           setValue={setValue}
           activityTimingOptions={activityTimingOptions}
           tamilnaduPlaces={tamilnaduPlaces}
+          preferenceFormError={preferenceFormError}
         />
       </div>
       <div className="flex justify-center">
-        <button className="p-5 rounded-2xl mt-10 text-3xl w-1/4 font-semibold bg-indigo-950 text-white border-4">
+        <button
+          onClick={handleSubmit}
+          className="p-5 rounded-2xl mt-10 text-3xl w-1/4 font-semibold bg-indigo-950 text-white border-4"
+        >
           Submit
         </button>
       </div>
