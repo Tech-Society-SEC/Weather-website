@@ -18,7 +18,7 @@ function RightPreferenceForm({
             onChange={setValue}
             placeholder="Nick-Name"
             className={`p-4 rounded-xl w-full ${
-              preferenceFormError.weather ? "border-8 border-red-700" : ""
+              preferenceFormError.nickname ? "border-8 border-red-700" : ""
             }`}
           />
           {preferenceFormError.nickname && (
